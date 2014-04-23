@@ -5,7 +5,7 @@ import sys
 from thread import *
  
 HOST = ''   # Symbolic name meaning all available interfaces
-PORT = 8888 
+PORT = 8889 
  
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print 'Socket created'
@@ -23,7 +23,7 @@ print 'Socket bind complete'
 s.listen(10)
 print 'Socket now listening'
  
-def reggister(username,password):
+def reggster(username,password):
     u = models.User(username,password)
     d.add(u)
     d.commit()
@@ -38,9 +38,9 @@ def clientthread(conn):
          
         #Receiving from client
         data = conn.recv(1024)
-        data = data.split("|")
-        if data[0]=="reggister":
-            reggister(data[1],data[2])
+        a = data.split("|")
+        if a[0]=="register":
+            register(a[1],a[2])
         reply = 'OK...' + data
         if not data:
             break
