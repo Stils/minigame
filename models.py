@@ -5,11 +5,15 @@ class User(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
     name = Column(String(50), unique=True)
-    email = Column(String(120), unique=True)
+    password = Column(String(120), unique=True)
+    x = Column(Integer)
+    y = Column(Integer)
 
-    def __init__(self, name=None, email=None):
+    def __init__(self, name=None, password=None):
         self.name = name
-        self.email = email
+        self.password = password
+        self.x = 0
+        self.y = 0
 
     def __repr__(self):
         return '<User %r>' % (self.name)
