@@ -10,13 +10,5 @@ Base = declarative_base()
 Base.query = db_session.query_property()
 
 def init_db():
-    import yourapplication.models
+    import models
     Base.metadata.create_all(bind=engine)
-
-from yourapplication.database import db_session
-
-@app.teardown_appcontext
-def shutdown_session(exception=None):
-    db_session.remove()
-
-
