@@ -27,7 +27,7 @@ def regster(username,password):
     d.commit()
 
 def clientthread(conn):
-    conn.send('Welcome to the server. Register by register|name|passowrd\n')
+    conn.send('Welcome to the server. Register by register|name|password\n')
      
     while True:
          
