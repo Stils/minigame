@@ -17,11 +17,13 @@ def main(stdscr):
 	win.addstr(5,1,"Pass: ")
 	win.addstr(6,1,"----------------------------")
 
+	curses.echo()
 	login = win.getstr(3,7,20)
 	win.addstr(3,1,"User: "+login)
 	password = win.getstr(5,7,20)
 	win.addstr(5,1,"Pass: "+password)
-
+	curses.noecho()
+	
 	stdscr.refresh()
 
 	if login != "":
