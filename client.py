@@ -44,36 +44,37 @@ def login(stdscr):
 	height = 20; width = 40
 	win = curses.newwin(height, width, begin_y, begin_x)
 	win.border('|', '|', '-', '-', '+', '+', '+', '+')
-	win.addstr(10,20,"X")
+	win.addstr(10,20,log)
 
 	x=10
 	y=20
 
 	while True:
-		if win.getch()==100:
+		inputt = win.getch()
+		if inputt==100:
 			win.addstr(x,y," ")
-			win.addstr(x,y+1,"X")
+			win.addstr(x,y+1,log)
 			y+=1
 			win.refresh()
 
-		elif win.getch()==97:
+		elif inputt==97:
 			win.addstr(x,y," ")
-			win.addstr(x,y-1,"X")
+			win.addstr(x,y-1,log)
 			y-=1
 			win.refresh()
 
-		elif win.getch()==119:
+		elif inputt==119:
 			win.addstr(x,y," ")
-			win.addstr(x-1,y,"X")
+			win.addstr(x-1,y,log)
 			x-=1
 			win.refresh()
 
-		elif win.getch()==115:
+		elif inputt==115:
 			win.addstr(x,y," ")
-			win.addstr(x+1,y,"X")
+			win.addstr(x+1,y,log)
 			x+=1
 			win.refresh()
-		elif win.getch()==27:
+		elif inputt==27:
 			break
 	 
 	# This raises ZeroDivisionError when i == 10.
