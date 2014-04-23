@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 import curses
-import curses.textpad
 
-def main(stdscr):
+def login(stdscr):
 # Clear screen
 	stdscr.clear()
  
@@ -18,34 +17,71 @@ def main(stdscr):
 	win.addstr(6,1,"----------------------------")
 
 	curses.echo()
-	login = win.getstr(3,7,20)
-	win.addstr(3,1,"User: "+login)
+	log = win.getstr(3,7,20)
+	win.addstr(3,1,"User: "+log)
 	password = win.getstr(5,7,20)
 	win.addstr(5,1,"Pass: "+password)
 	curses.noecho()
-	
+
 	stdscr.refresh()
 
-	if login != "":
+	if log != "":
 		stdscr.clear()
 		begin_x = 0; begin_y = 0
-		height = 4; width = 25
+		height = 3; width = 25
 		win = curses.newwin(height, width, begin_y, begin_x)
 		win.border('|', '|', '-', '-', '+', '+', '+', '+')
-		win.addstr(1,1,'Welcome %s!'% login,curses.A_BOLD)
-		win.addstr(2,1,'8===D (.)(.)')
+		win.addstr(1,1,'Welcome %s!'% log.upper(),curses.A_BOLD)
 
-	stdscr.refresh()
-	win.refresh()
-	 
-	 
+		stdscr.refresh()
+		win.refresh()
+
+
+	stdscr.getch()
+	stdscr.clear()
+ 	
+	begin_x = 0; begin_y = 0
+	height = 20; width = 40
+	win = curses.newwin(height, width, begin_y, begin_x)
+	win.border('|', '|', '-', '-', '+', '+', '+', '+')
+	win.addstr(10,20,"X")
+
+	x=10
+	y=20
+
+	while True:
+		if win.getch()==100:
+			win.addstr(x,y," ")
+			win.addstr(x,y+1,"X")
+			y+=1
+			win.refresh()
+
+		elif win.getch()==97:
+			win.addstr(x,y," ")
+			win.addstr(x,y-1,"X")
+			y-=1
+			win.refresh()
+
+		elif win.getch()==119:
+			win.addstr(x,y," ")
+			win.addstr(x-1,y,"X")
+			x-=1
+			win.refresh()
+
+		elif win.getch()==115:
+			win.addstr(x,y," ")
+			win.addstr(x+1,y,"X")
+			x+=1
+			win.refresh()
+		elif win.getch()==27:
+			break
 	 
 	# This raises ZeroDivisionError when i == 10.
 	# for i in range(0, 11):
 	# v = i-10
 	# stdscr.addstr(i, 0, '10 divided by {} is {}'.format(v, 10/v))
 	 
-	 
+	
 	stdscr.getch()
- 
-curses.wrapper(main)
+	
+curses.wrapper(login)
