@@ -1,6 +1,5 @@
-from database import db_session
-import models
-
+from database import db_session as d
+import models 
 import socket
 import sys
 from thread import *
@@ -24,6 +23,11 @@ print 'Socket bind complete'
 s.listen(10)
 print 'Socket now listening'
  
+def reggister(username,password):
+    u = models.User(username,password)
+    d.add(u)
+    d.commit()
+
 #Function for handling connections. This will be used to create threads
 def clientthread(conn):
     #Sending message to connected client
@@ -34,6 +38,9 @@ def clientthread(conn):
          
         #Receiving from client
         data = conn.recv(1024)
+        data = data.split("|")
+        if data[0]=="reggister":
+            reggister(data[1],data[2])
         reply = 'OK...' + data
         if not data:
             break
