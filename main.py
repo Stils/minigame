@@ -3,6 +3,7 @@ from models import *
 import socket
 import sys
 from thread import *
+import time
  
 HOST = ''  
 PORT = 8889
@@ -49,8 +50,12 @@ def move(direction,user):
         user.x += 1
     
     print user.x,user.y
-    d.add(user)
     d.commit()
+
+def sendmap(conn):
+    while 1:
+        conn.sendall("Yay, Dupka!")
+        time.sleep(1)
 
 def clientthread(conn):
     conn.send('Welcome to the server. Register by register|name|password\n')
@@ -78,15 +83,12 @@ def clientthread(conn):
         except:
             pass
 
-
-        reply = 'OK...' + data
         if not data:
             break
      
-        conn.sendall(reply)
-     
     conn.close()
- 
+    
+start_new_thread(sendmap, (conn,))
 while 1:
     conn, addr = s.accept()
     print 'Connected with ' + addr[0] + ':' + str(addr[1])

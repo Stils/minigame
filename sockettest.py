@@ -9,18 +9,18 @@ win = curses.initscr()
 
 while True:
 	print s.recv(1024)
-		inputt = win.getch()
-		if inputt==ord("d"):
-			s.sendall("move|e")
+	inputt = win.getch()
+	if inputt==ord("d"):
+		s.sendall("move|e")
 
-		elif inputt==ord("a"):
-			s.sendall("move|w")
+	elif inputt==ord("a"):
+		s.sendall("move|w")
 
-		elif inputt==ord("w"):
-			s.sendall("move|n")
+	elif inputt==ord("w"):
+		s.sendall("move|n")
 
-		elif inputt==ord("s"):
-			s.sendall("move|s")
+	elif inputt==ord("s"):
+		s.sendall("move|s")
 
-		elif inputt==27:
-			break
+	elif inputt==27:
+		break
