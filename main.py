@@ -7,7 +7,7 @@ import time
  
 HOST = ''  
 PORT = 8889
- 
+connections = []
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print 'Socket created'
  
@@ -52,9 +52,10 @@ def move(direction,user):
     print user.x,user.y
     d.commit()
 
-def sendmap(conn):
+def sendmap(x):
     while 1:
-        conn.sendall("Yay, Dupka!")
+        for i in connections:
+            conn.sendall("Yay, Dupka!")
         time.sleep(1)
 
 def clientthread(conn):
@@ -88,9 +89,10 @@ def clientthread(conn):
      
     conn.close()
     
-start_new_thread(sendmap, (conn,))
+start_new_thread(sendmap,(None,))
 while 1:
     conn, addr = s.accept()
+    connections.append(conn)
     print 'Connected with ' + addr[0] + ':' + str(addr[1])
     
     start_new_thread(clientthread ,(conn,))
