@@ -11,8 +11,8 @@ class User(Base):
 
     def __init__(self, name=None, password=None):
         self.name = name
-        self.password = password
         self.x = 0
+        self.password = password
         self.y = 0
 
     def __repr__(self):
