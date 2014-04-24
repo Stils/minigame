@@ -21,7 +21,7 @@ print 'Socket bind complete'
 s.listen(10)
 print 'Socket now listening'
  
-def regster(username,password):
+def register(username,password):
     u = models.User(username,password)
     d.add(u)
     d.commit()
@@ -32,10 +32,20 @@ def clientthread(conn):
     while True:
          
         #Receiving from client
-        data = conn.recv(1024)
+        data = ""
+
+        try:
+            data = conn.recv(1024)
+        except socket.error:
+            pass
+
+        print data
         a = data.split("|")
-        if a[0]=="register":
-            register(a[1],a[2])
+        try:
+            if a[0]=="register":
+                register(a[1],a[2])
+        except:
+            pass
         reply = 'OK...' + data
         if not data:
             break
