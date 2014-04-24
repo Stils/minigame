@@ -52,10 +52,18 @@ def move(direction,user):
     print user.x,user.y
     d.commit()
 
+def parsemap():
+    users = []
+    for i in User.query.all():
+        user = "-".join([i.name,str(i.x),str(i.y)])
+        users.append(user)
+    users = "|".join(users)
+    return users
+
 def sendmap(x):
     while 1:
         for i in connections:
-            conn.sendall("Yay, Dupka!")
+            i.sendall(parsemap())
         time.sleep(1)
 
 def clientthread(conn):
