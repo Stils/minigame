@@ -50,7 +50,7 @@ def login(stdscr):
 	y=20
 
 	while True:
-		inputt = win.getch()
+		inputt = win.getch() # zrobic tak zeby kasowalo caly login!
 		if inputt==100:
 			win.addstr(x,y," ")
 			win.addstr(x,y+1,log)
