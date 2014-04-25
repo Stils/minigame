@@ -6,7 +6,7 @@ import time
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect(("127.0.0.1",8886))
-s.send("login|mat|abc")
+s.send("login|piotrek|abc")
 win = curses.initscr()
 curses.noecho()
 

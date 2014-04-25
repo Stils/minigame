@@ -23,6 +23,7 @@ s.listen(10)
 print 'Socket now listening'
  
 def register(username,password):
+    print "dupka"
     u = User(username,password)
     d.add(u)
     d.commit()
