@@ -5,8 +5,8 @@ from thread import *
 import time
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect(("127.0.0.1",8886))
-s.send("login|piotrek|abc")
+s.connect(("109.173.134.195",8888))
+s.send("login|mat|abc")
 win = curses.initscr()
 curses.noecho()
 
@@ -26,7 +26,7 @@ def drawmap(connection):
 
 		print users
 		for i in users:
-			win.addstr(int(i[2]),int(i[1]),i[0])
+			win.addstr(int(i[2]),int(i[1]),i[0],curses.A_BOLD)
 		win.refresh()
 
 start_new_thread(drawmap,(s,))

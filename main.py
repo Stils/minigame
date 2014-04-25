@@ -50,7 +50,7 @@ def move(direction,user):
     elif direction == "e":
         user.x += 1
     
-    print user.x,user.y
+    print user.name,user.x,user.y
     d.commit()
 
 def parsemap():
@@ -64,9 +64,12 @@ def parsemap():
 
 def sendmap(x):
     while 1:
-        for i in connections:
-            i.sendall(parsemap())
-        time.sleep(0.1)
+        try:
+            for i in connections:
+                i.sendall(parsemap())
+        except socket.error:
+            pass
+        time.sleep(0.05)
 
 def clientthread(conn):
     conn.send('Welcome to the server. Register by register|name|password\n')
