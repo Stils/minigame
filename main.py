@@ -6,7 +6,7 @@ from thread import *
 import time
  
 HOST = ''  
-PORT = 8889
+PORT = 8884
 connections = []
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print 'Socket created'
@@ -58,6 +58,7 @@ def parsemap():
         user = "-".join([i.name,str(i.x),str(i.y)])
         users.append(user)
     users = "|".join(users)
+    # print users
     return users
 
 def sendmap(x):
