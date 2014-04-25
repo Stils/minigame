@@ -5,33 +5,34 @@ from thread import *
 import time
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect(("127.0.0.1",8884))
+s.connect(("127.0.0.1",8886))
 s.send("login|mat|abc")
 win = curses.initscr()
+curses.noecho()
 
-
-def mapxx(xx):
+def drawmap(connection):
 	while 1:
 		users = []
-		data = "aa"
-		data = xx.recv(1024)
+		data = connection.recv(1024)
 		win.addstr(1,1,data)
 		win.refresh()
-		# user = data.split("|")
-		# for i in user:
-		# 	users.append(user.split("-"))
 
-		# win.clear()
-		# win.border('|', '|', '-', '-', '+', '+', '+', '+')
+		user = data.split("|")
+		for i in user:
+			users.append(i.split("-"))
 
-		# for i in users:
-		# 	win.addstr(i[1],i[2],i[0])
-		# win.refresh()
+		win.clear()
+		win.border('|', '|', '-', '-', '+', '+', '+', '+')
 
-start_new_thread(mapxx,(s,))
+		print users
+		for i in users:
+			win.addstr(int(i[2]),int(i[1]),i[0])
+		win.refresh()
+
+start_new_thread(drawmap,(s,))
 
 while True:
-	# data = s.recv(1024)
+	data = s.recv(1024)
 	inputt = win.getch()
 	win.refresh()
 	if inputt==ord("d"):

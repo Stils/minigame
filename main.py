@@ -6,7 +6,7 @@ from thread import *
 import time
  
 HOST = ''  
-PORT = 8884
+PORT = 8886
 connections = []
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print 'Socket created'
@@ -41,9 +41,9 @@ def move(direction,user):
         return False
 
     if direction == "n":
-        user.y += 1
-    elif direction == "s":
         user.y -= 1
+    elif direction == "s":
+        user.y += 1
     elif direction == "w":
         user.x -= 1
     elif direction == "e":
@@ -65,7 +65,7 @@ def sendmap(x):
     while 1:
         for i in connections:
             i.sendall(parsemap())
-        time.sleep(1)
+        time.sleep(0.1)
 
 def clientthread(conn):
     conn.send('Welcome to the server. Register by register|name|password\n')
